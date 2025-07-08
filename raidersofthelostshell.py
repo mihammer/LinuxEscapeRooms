@@ -123,13 +123,13 @@ def challenge_tail(inventory):
     banner("Challenge 6 – The File of Doom")
     show_box("Logs")
     slow("A log file crackles: 'Only the final 10 lines of /var/log/syslog are safe to read.'")
-    ask_shell("log> ", {"tail /var/log/syslog", "tail -n 10 /var/log/syslog"}, "`tail` lets you read the last lines of a file.", inventory, key_name="Copper Key")
+    ask_shell("log> ", {"tail /var/log/syslog", "tail -n 10 /var/log/syslog", "tail -10 /var/log/syslog"}, "`tail` lets you read the last lines of a file.", inventory, key_name="Copper Key")
 
 def challenge_lslt(inventory):
     banner("Challenge 7 – The Timekeeper’s Tomb")
     show_box("Tomb")
     slow("'Reveal the file most recently changed. Time is ticking.'")
-    ask_shell("tomb> ", {"ls -lt"}, "`ls -lt` sorts files by modification time.", inventory, key_name="Marble Key")
+    ask_shell("tomb> ", {"ls -lt", "ls -t"}, "`ls -lt` sorts files by modification time.", inventory, key_name="Marble Key")
 
 def challenge_who(inventory):
     banner("Challenge 8 – Rival Encounter")

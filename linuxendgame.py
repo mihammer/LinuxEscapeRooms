@@ -150,7 +150,7 @@ def ch_ip_addr():
 def ch_tcpdump():
     banner("Challenge 8 – Capture the Packets")
     holo("Network Traces")
-    slow("Banner: 'Need to record network gamma rays. Which tool?'")
+    slow("Banner: 'Need to record network gamma rays. We need to know where those packets go! Which tool?'")
     ask_shell("endgame> ", {"tcpdump"}, "`tcpdump` ready—sniffing packets like a pro.")
 
 def ch_mounts():

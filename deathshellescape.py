@@ -96,7 +96,7 @@ def ch_free():
 def ch_top():
     banner("Challenge 3 – Getting to the top of it.")
     holo("System Stats")
-    slow("R2‑D2 plugs in, awaiting the resource overview. Display current system usage.")
+    slow("R2‑D2 plugs in, awaiting the resource overview. Display current system resource usage, including memory and cpu.")
     ask_shell("death-shell> ", {"top"}, "System performance metrics are now visible.")
 
 def ch_kill():
@@ -120,7 +120,7 @@ def ch_del_user():
 def ch_grep():
     banner("Challenge 7 – A Grep Hope")
     holo("Search Scroll")
-    slow("Leia whispers: 'Find the word *rebellion* in the stolen plans.txt.'")
+    slow("Leia whispers: 'Find the word *rebellion* in the stolen plans.txt.' using grep")
     ask_shell("death-shell> ", {"grep rebellion plans.txt", "grep rebellion"}, "Search complete. Intel located.")
 
 def ch_symlink():
@@ -138,7 +138,7 @@ def ch_iostat():
 def ch_support():
     banner("Challenge 10 – Revenge of the Support Tools")
     holo("Diagnostic Tools")
-    slow("Name the two diagnostic collectors trusted by the Rebellion support team. One for Red Hat, one for SUSE.")
+    slow("Name one of the two diagnostic collectors trusted by the Rebellion support team. One for Red Hat or one for SUSE.")
     ask_shell("death-shell> ", {"sosreport", "supportconfig", "sosreport supportconfig"},
               "Support tools accepted. Rebellion support authorized.")
 
