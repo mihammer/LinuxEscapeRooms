@@ -29,15 +29,10 @@ def shell(prompt="avenger@linux:~$ "):  # Actual input helper
 #  Generic challenge wrapper (answers hidden)
 # ---------------------------------------------------------------------------
 
-def ask_shell(prompt, correct_cmds, explanation):
-    """
-    prompt        – the raw input prompt (generic, no hints)
-    correct_cmds  – a set/tuple of accepted answers (case-insensitive)
-    explanation   – success text shown only after a correct answer
-    """
+def ask_shell(question, correct_cmds, explanation, reveal_answer=True):
     attempts = 0
     while True:
-        cmd = shell(prompt)
+        cmd = shell(question)
         cmd_lc = cmd.lower()
 
         if cmd_lc in correct_cmds or any(cmd_lc.startswith(c) for c in correct_cmds):
@@ -47,15 +42,19 @@ def ask_shell(prompt, correct_cmds, explanation):
 
         attempts += 1
         if attempts == 3:
-            slow("❌  Strike three!  Type 'skip' to move on or try again.")
+            slow("❌  Strike three!  Type `skip` to move on or try again.")
         elif attempts > 3:
             if cmd_lc == "skip":
-                slow("↩️  Skipped.  Onward, hero.")
+                slow("↩️  Skipped.  The rebellion moves on.")
+                if reveal_answer:
+                    correct_sample = next(iter(correct_cmds))
+                    slow(f"📘  The answer was: `{correct_sample}`")
                 break
             else:
-                slow("❌  Nope.  (Or type 'skip'.)")
+                slow("❌  Nope.  (Or type `skip`.)")
         else:
             slow("❌  Nope.  Try again.")
+
 
 # ---------------------------------------------------------------------------
 #  Intro & ambience

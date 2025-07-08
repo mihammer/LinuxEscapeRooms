@@ -21,7 +21,7 @@ def shell(prompt="padawan@death-shell:~$ "):
 #  Generic challenge wrapper (keys removed)
 # ---------------------------------------------------------------------------
 
-def ask_shell(question, correct_cmds, explanation):
+def ask_shell(question, correct_cmds, explanation, reveal_answer=True):
     attempts = 0
     while True:
         cmd = shell(question)
@@ -38,11 +38,15 @@ def ask_shell(question, correct_cmds, explanation):
         elif attempts > 3:
             if cmd_lc == "skip":
                 slow("↩️  Skipped.  The rebellion moves on.")
+                if reveal_answer:
+                    correct_sample = next(iter(correct_cmds))
+                    slow(f"📘  The answer was: `{correct_sample}`")
                 break
             else:
                 slow("❌  Nope.  (Or type `skip`.)")
         else:
             slow("❌  Nope.  Try again.")
+
 
 # ---------------------------------------------------------------------------
 #  Intro & ambience (Star Wars style)

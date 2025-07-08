@@ -29,7 +29,7 @@ def give_key(inventory, name):
 #  Generic challenge wrapper
 # ---------------------------------------------------------------------------
 
-def ask_shell(question, correct_cmds, explanation, inventory, key_name=None):
+def ask_shell(question, correct_cmds, explanation, inventory, key_name=None, reveal_answer=True):
     attempts = 0
     while True:
         cmd = shell(question)
@@ -48,6 +48,9 @@ def ask_shell(question, correct_cmds, explanation, inventory, key_name=None):
         elif attempts > 3:
             if cmd_lc == "skip":
                 slow("↩️  Skipped.  No key for this one, but the story marches on.")
+                if reveal_answer:
+                    correct_sample = next(iter(correct_cmds))
+                    slow(f"📘  The answer was: `{correct_sample}`")
                 break
             else:
                 slow("❌  Nope.  (Or type `skip`.)")
