@@ -10,7 +10,7 @@ if [ ${#PY_FILES[@]} -eq 0 ]; then
     exit 1
 fi
 
-echo "Select a Python file to run:"
+echo "Select a escape room to run:"
 select FILE in "${PY_FILES[@]}" "Quit"; do
     if [[ "$REPLY" -gt 0 && "$REPLY" -le "${#PY_FILES[@]}" ]]; then
         echo "Running $FILE..."
