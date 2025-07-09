@@ -255,5 +255,3 @@ Here's a consolidated list of **Linux commands** used across all the escape room
 * `apt install`, `apt-get install`
 
 ---
-
-Let me know if you want this grouped by difficulty level, theme, or turned into a printable cheat sheet!
