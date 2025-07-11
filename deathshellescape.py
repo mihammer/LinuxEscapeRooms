@@ -4,7 +4,7 @@ import textwrap, time, sys
 #  Utility helpers (unchanged)
 # ---------------------------------------------------------------------------
 
-def slow(text, delay=0.008):  # Fast scroll for CLI game
+def slow(text, delay=0.006):  # Fast scroll for CLI game
     for ch in text:
         print(ch, end='', flush=True)
         time.sleep(delay)
@@ -21,11 +21,15 @@ def shell(prompt="padawan@death-shell:~$ "):
 #  Generic challenge wrapper (keys removed)
 # ---------------------------------------------------------------------------
 
-def ask_shell(question, correct_cmds, explanation, reveal_answer=True):
+def ask_shell(question, correct_cmds, explanation, hint="", reveal_answer=True):
     attempts = 0
     while True:
         cmd = shell(question)
         cmd_lc = cmd.lower()
+
+        if cmd_lc == "hint":
+            slow(f"💡 Hint: {hint}")
+            continue
 
         if cmd_lc in correct_cmds or any(cmd_lc.startswith(c) for c in correct_cmds):
             slow("\n✅  Correct!")
@@ -34,18 +38,18 @@ def ask_shell(question, correct_cmds, explanation, reveal_answer=True):
 
         attempts += 1
         if attempts == 3:
-            slow("❌  Strike three!  Type `skip` to move on or try again.")
+            slow("❌  Strike three!  Type `skip` to move on, `hint` for a clue, or try again.")
         elif attempts > 3:
             if cmd_lc == "skip":
-                slow("↩️  Skipped.  The rebellion moves on.")
+                slow("↩️  Skipped. The rebellion moves on.")
                 if reveal_answer:
                     correct_sample = next(iter(correct_cmds))
                     slow(f"📘  The answer was: `{correct_sample}`")
                 break
             else:
-                slow("❌  Nope.  (Or type `skip`.)")
+                slow("❌  Nope. (Try again, or type `hint` or `skip`.)")
         else:
-            slow("❌  Nope.  Try again.")
+            slow("❌  Nope. Try again or type `hint`.")
 
 
 # ---------------------------------------------------------------------------
@@ -88,63 +92,111 @@ def ch_add_user():
     banner("Challenge 1 – I Am the User You're Looking For")
     holo("User Create")
     slow("Stormtrooper login console demands a new account for undercover access. Create a user named `snadella`.")
-    ask_shell("death-shell> ", {"sudo useradd snadella", "useradd snadella"},
-              "User `snadella` has been created. You're in.")
+    ask_shell(
+        "death-shell> ",
+        {"sudo useradd snadella", "useradd snadella"},
+        "User `snadella` has been created. You're in.",
+        hint="Use a command that adds a new user. Think: `user add`."
+    )
 
 def ch_free():
     banner("Challenge 2 – The RAM Awakens")
     holo("Memory Check")
     slow("C‑3PO: 'I calculate memory efficiency is critical for survival. How much memory is free?'")
-    ask_shell("death-shell> ", {"free", "free -h"}, "Memory status displayed. Vital stats acquired.")
+    ask_shell(
+        "death-shell> ",
+        {"free", "free -h"},
+        "Memory status displayed. Vital stats acquired.",
+        hint="Try a command that literally means 'no cost'. Bonus: add `-h` for human-readable."
+    )
 
 def ch_top():
     banner("Challenge 3 – Getting to the top of it.")
     holo("System Stats")
-    slow("R2‑D2 plugs in, awaiting the resource overview. Display current system resource usage, including memory and cpu.")
-    ask_shell("death-shell> ", {"top"}, "System performance metrics are now visible.")
+    slow("R2‑D2 plugs in, awaiting the resource overview. Display current system resource usage, including memory and CPU.")
+    ask_shell(
+        "death-shell> ",
+        {"top"},
+        "System performance metrics are now visible.",
+        hint="This command puts you at the top of the process food chain."
+    )
 
 def ch_kill():
     banner("Challenge 4 – Attack of the PID")
     holo("Terminate 1045")
     slow("A Sith process (PID 1045) consumes the CPUs. End it!")
-    ask_shell("death-shell> ", {"kill 1045", "kill -9 1045"}, "Process eliminated. Balance restored.")
+    ask_shell(
+        "death-shell> ",
+        {"kill 1045", "kill -9 1045"},
+        "Process eliminated. Balance restored.",
+        hint="To end a process, you must... well, kill it. Use the PID."
+    )
 
 def ch_chmod():
     banner("Challenge 5 – You don't have permission to access this file")
     holo("Unlock File")
     slow("A locked datapad requires 755 permissions to open the hatch. Adjust file permissions for `runme.sh`.")
-    ask_shell("death-shell> ", {"chmod 755 runme.sh", "chmod 755"}, "Access granted. Hatch unlocked.")
+    ask_shell(
+        "death-shell> ",
+        {"chmod 755 runme.sh", "chmod 755"},
+        "Access granted. Hatch unlocked.",
+        hint="Change the file's mode to 755 using the right command."
+    )
 
 def ch_del_user():
     banner("Challenge 6 – Order 66: Remove dvader")
     holo("User Delete")
     slow("Alas, dvader has joined the dark side – delete the account.")
-    ask_shell("death-shell> ", {"sudo userdel dvader", "userdel dvader"}, "dvader060 has been purged from the records.")
+    ask_shell(
+        "death-shell> ",
+        {"sudo userdel dvader", "userdel dvader"},
+        "dvader060 has been purged from the records.",
+        hint="The opposite of adding a user. Start with `user`."
+    )
 
 def ch_grep():
     banner("Challenge 7 – A Grep Hope")
     holo("Search Scroll")
     slow("Leia whispers: 'Find the word *rebellion* in the stolen plans.txt.' using grep")
-    ask_shell("death-shell> ", {"grep rebellion plans.txt", "grep rebellion"}, "Search complete. Intel located.")
+    ask_shell(
+        "death-shell> ",
+        {"grep rebellion plans.txt", "grep rebellion"},
+        "Search complete. Intel located.",
+        hint="Use the galaxy’s favorite pattern searcher."
+    )
 
 def ch_symlink():
     banner("Challenge 8 – The Phantom Link")
     holo("Symbolic Links")
     slow("Sys‑Wan: 'What command creates a symbolic link, young Padawan?'")
-    ask_shell("death-shell> ", {"ln -s", "ln -s target link"}, "A symbolic link has been forged.")
+    ask_shell(
+        "death-shell> ",
+        {"ln -s", "ln -s target link"},
+        "A symbolic link has been forged.",
+        hint="You use this command to create links. The `-s` flag makes it symbolic."
+    )
 
 def ch_iostat():
     banner("Challenge 9 – The I/O Strikes Back")
     holo("Disk Perf")
     slow("The fusion core groans. Determine disk I/O stats fast!")
-    ask_shell("death-shell> ", {"iostat"}, "Diagnostics complete. Core is stable—for now.")
+    ask_shell(
+        "death-shell> ",
+        {"iostat"},
+        "Diagnostics complete. Core is stable—for now.",
+        hint="IO + statistics. Smash them together."
+    )
 
 def ch_support():
     banner("Challenge 10 – Revenge of the Support Tools")
     holo("Diagnostic Tools")
     slow("Name one of the two diagnostic collectors trusted by the Rebellion support team. One for Red Hat or one for SUSE.")
-    ask_shell("death-shell> ", {"sosreport", "supportconfig", "sosreport supportconfig"},
-              "Support tools accepted. Rebellion support authorized.")
+    ask_shell(
+        "death-shell> ",
+        {"sosreport", "supportconfig", "sosreport supportconfig"},
+        "Support tools accepted. Rebellion support authorized.",
+        hint="One starts with `sos`, the other sounds like what you'd send to support."
+    )
 
 
 # ---------------------------------------------------------------------------

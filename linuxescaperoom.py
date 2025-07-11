@@ -2,13 +2,13 @@
 Linux Escape Room – Sim-Shell Edition (Fixed & Fast Scroll)
 """
 
-import textwrap, time, sys
+import textwrap, time
 
 # ---------------------------------------------------------------------------
 #  Utility helpers
 # ---------------------------------------------------------------------------
 
-def slow(text, delay=0.008):  # 👈 FAST SCROLL!
+def slow(text, delay=0.006):  # 👈 FAST SCROLL!
     for ch in text:
         print(ch, end='', flush=True)
         time.sleep(delay)
@@ -29,33 +29,37 @@ def give_key(inventory, name):
 #  Generic challenge wrapper
 # ---------------------------------------------------------------------------
 
-def ask_shell(question, correct_cmds, explanation, inventory, key_name=None, reveal_answer=True):
+def ask_shell(question, correct_cmds, explanation, inventory, key_name=None, reveal_answer=True, hint=None):
     attempts = 0
     while True:
         cmd = shell(question)
         cmd_lc = cmd.lower()
 
-        if cmd_lc in correct_cmds or any(cmd_lc.startswith(c) for c in correct_cmds):
+        if cmd_lc in {c.lower() for c in correct_cmds} or any(cmd_lc.startswith(c.lower()) for c in correct_cmds):
             slow("\n✅  Correct!")
             slow(explanation)
             if key_name:
                 give_key(inventory, key_name)
             break
 
+        if cmd_lc == "hint" and hint:
+            slow(f"💡 Hint: {hint}")
+            continue
+
         attempts += 1
         if attempts == 3:
-            slow("❌  Strike three!  Type `skip` to move on or try again.")
+            slow("❌  Strike three!  Type `skip` to move on, `hint` for a clue, or try again.")
         elif attempts > 3:
             if cmd_lc == "skip":
-                slow("↩️  Skipped.  No key for this one, but the story marches on.")
+                slow("↩️  Skipped. The game moves on.")
                 if reveal_answer:
                     correct_sample = next(iter(correct_cmds))
                     slow(f"📘  The answer was: `{correct_sample}`")
                 break
             else:
-                slow("❌  Nope.  (Or type `skip`.)")
+                slow("❌  Nope. (Try again, or type `hint` or `skip`.)")
         else:
-            slow("❌  Nope.  Try again.")
+            slow("❌  Nope. Try again or type `hint`.")
 
 # ---------------------------------------------------------------------------
 #  Intro & ambience
@@ -71,7 +75,7 @@ def intro():
           • Type like you’re really at a shell.
           • After three wrong commands you may choose to 'skip' (but keys matter!).
 
-        Type 'help' at any prompt for a hint.
+        Type 'hint' at any prompt for a clue.
     """))
     input("\n(Press Enter to start) ")
 
@@ -105,7 +109,8 @@ def challenge_fstab(inventory):
     slow("One line is bogus. Which number is wrong? (Type just the number)")
     ask_shell("> ", {"3"},
               "Explanation: '/dev/sdzzz' doesn’t follow normal Linux disk naming. It’s invalid.",
-              inventory, key_name="Brass Key")
+              inventory, key_name="Brass Key",
+              hint="Device names typically follow patterns like sda1, sdb2, etc.")
 
 def challenge_top(inventory):
     banner("Challenge 2 – CPU Hog Hunt")
@@ -120,12 +125,13 @@ PID   USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
     slow("Which command is devouring the CPU?")
     ask_shell("> ", {"httpd", "apache"},
               "`httpd` shows 45 % CPU – clearly hogging resources.",
-              inventory, key_name="Copper Key")
+              inventory, key_name="Copper Key",
+              hint="Look at the `%CPU` column and match it to the command.")
 
-def mini_box(inventory, label, question, correct_cmds, explanation, key_name):
+def mini_box(inventory, label, question, correct_cmds, explanation, key_name, hint):
     show_box(label)
     slow(f"The {label.lower()} box clicks and speaks:\n“{question}”")
-    ask_shell(label + " box> ", correct_cmds, explanation, inventory, key_name=key_name)
+    ask_shell(label + " box> ", correct_cmds, explanation, inventory, key_name=key_name, hint=hint)
     slow(f"The {label.lower()} box pops open revealing a small compartment…")
 
 def challenge_logs(inventory):
@@ -134,7 +140,8 @@ def challenge_logs(inventory):
              "Where do most Linux log files live?",
              {"/var/log", "var/log"},
              "Standard distros store logs under `/var/log`.",
-             "Iron Key")
+             "Iron Key",
+             hint="Starts with `/var` and relates to system activity and logs.")
 
     slow("\nInside the Log box you find a crumpled paper entitled 'messages'.")
     slow("To read the final 10 lines you need the right command…")
@@ -142,7 +149,8 @@ def challenge_logs(inventory):
               {"tail -n 10 /var/log/messages", "tail /var/log/messages -n 10",
                "tail /var/log/messages"},
               "The `tail -n 10` command outputs the end of a file.",
-              inventory)
+              inventory,
+              hint="Try a command that shows the bottom lines of a file.")
 
 def challenge_kernel(inventory):
     banner("Challenge 4 – Know Thy Kernel")
@@ -151,7 +159,8 @@ def challenge_kernel(inventory):
     ask_shell("kernel-box> ",
               {"uname -r", "uname -a"},
               "`uname -r` prints kernel version; `-a` gives full system info.",
-              inventory, key_name="Steel Key")
+              inventory, key_name="Steel Key",
+              hint="Try a command that shows system or node name. Ends in `name`.")
 
 def challenge_sshd(inventory):
     banner("Challenge 5 – Where’s my SSH?")
@@ -161,7 +170,8 @@ def challenge_sshd(inventory):
               "service ssh status", "service sshd status",
               "ps -ef | grep sshd", "pgrep sshd"},
              "`systemctl status sshd` shows the daemon’s status.",
-             key_name="Obsidian Key")
+             key_name="Obsidian Key",
+             hint="Use `systemctl`, `service`, or `ps` to check services or processes.")
 
 def challenge_path(inventory):
     banner("Challenge 6 – PATH Enlightenment")
@@ -169,7 +179,8 @@ def challenge_path(inventory):
              "Print the PATH env-var for the current user:",
              {"echo $path", "echo $PATH", "printenv path", "printenv PATH"},
              "`echo $PATH` shows directories searched for executables.",
-             key_name="Silver Key")
+             key_name="Silver Key",
+             hint="It’s an environment variable. Try using `echo` or `printenv`.")
 
 def challenge_azure_console(inventory):
     banner("Challenge 7 – Azure Plan B")
@@ -177,7 +188,8 @@ def challenge_azure_console(inventory):
              "On Azure, SSH is blocked. What lets you see the boot screen?",
              {"serial console", "console"},
              "Azure Serial Console gives low-level VM access even when SSH fails.",
-             key_name="Azure Blue Key")
+             key_name="Azure Blue Key",
+             hint="It’s a special console that works even when SSH doesn’t.")
 
 def challenge_python_ver(inventory):
     banner("Challenge 8 – Python Showdown")
@@ -185,7 +197,8 @@ def challenge_python_ver(inventory):
              "Which command shows what `python` binary will be used?",
              {"which python", "type -a python", "command -v python"},
              "`which python` or `type -a python` shows which executable runs.",
-             key_name="Golden Key")
+             key_name="Golden Key",
+             hint="Try `which`, `type`, or `command` followed by `python`.")
 
 # ---------------------------------------------------------------------------
 #  Finale
