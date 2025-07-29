@@ -64,7 +64,7 @@ def ask_shell(question, correct_cmds, explanation, inventory, key_name=None, rev
 def intro():
     banner("RAIDERS OF THE LOST SHELL")
     slow(textwrap.dedent("""
-        You are Todd Hammer, digital archaeologist. A secret login portal has transported you
+        You are a digital archaeologist. A secret login portal has transported you
         to the legendary Temple of Kernux. Your goal: retrieve the Lost Shell before the
         rival hacker cult, The Forked Process, beats you to it.
 
