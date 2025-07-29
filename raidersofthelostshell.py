@@ -201,6 +201,8 @@ def finale(inventory):
 # ---------------------------------------------------------------------------
 
 def main():
+    import os
+    os.system('cls' if os.name == 'nt' else 'clear')
     inventory = []
     intro()
     challenge_pwd(inventory)

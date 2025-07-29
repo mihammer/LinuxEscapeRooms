@@ -208,6 +208,8 @@ def finale():
 # ---------------------------------------------------------------------------
 
 def main():
+    import os
+    os.system('cls' if os.name == 'nt' else 'clear')
     intro()
     ch_crontab()
     ch_date()
