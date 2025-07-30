@@ -13,4 +13,6 @@ You will now have a folder named LinuxEscapeRooms.
 cd to that directory and run each by: 
 python3 filename.py
 
+You can also give starthere.sh and run from there. You will need to make it executible. 
+
 Enjoy!

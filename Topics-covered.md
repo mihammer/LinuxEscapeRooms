@@ -2,7 +2,7 @@
 Below are a list of commands covered in the Linux escape rooms
 _________________________________________________________________
 
-## "deathshellescape.py" Star Wars–themed escape room game:
+## "spaceshellescape.py" Space–themed escape room game:
 
 ### 🧠 Topics by Challenge:
 
@@ -39,8 +39,8 @@ _________________________________________________________________
 
 ---------------------------------------------------
 
-## linuxendgame.py -  Avengers-style "Time Heist" narrative
-Here's a list of **Linux topics** covered in the Marvel-themed game **“LINUX: ENDGAME”**:
+## SubmarineEscape.py -  
+Here's a list of **Linux topics** covered:
 
 ### 🧠 Topics by Challenge:
 
@@ -117,7 +117,7 @@ Topic: Command resolution and executable lookup
 
 ------------------------------------------------------
 
-## raidersofthelostshell.py
+## prisonescape.py
 
 **Current Working Directory**
 Command: `pwd`
@@ -155,7 +155,26 @@ Topic: User sessions and login tracking
 Commands: `cat`, `less`, `nano`
 Topic: File inspection before execution
 
+------------------------------------------------------
 
+## sshd_a_new_hope.py
+
+| #   | Topic                    | Description                                                                 |
+|-----|--------------------------|-----------------------------------------------------------------------------|
+| 1️⃣ | VM Boot Confirmation     | How to verify if a VM has fully booted using the **Azure Serial Console**. |
+| 2️⃣ | SSHD Service Check       | Checking the SSH daemon's (`sshd`) status with `systemctl`.                |
+| 3️⃣ | SSHD Config File Review  | Locating and viewing the SSH configuration file (`/etc/ssh/sshd_config`).  |
+| 4️⃣ | SSHD Logs                | Using `journalctl` to find error logs related to `sshd` failures.          |
+| 5️⃣ | VM Firewall Rules        | Checking internal firewall rules (`iptables`, `ufw`, `firewalld`) for port 22. |
+| 6️⃣ | TCP Connectivity Testing | Using tools like `nc`, `telnet`, or PowerShell’s `Test-NetConnection`.     |
+| 7️⃣ | Live Log Monitoring      | Watching SSH connection attempts in real time with `journalctl -f -u sshd`.|
+| 8️⃣ | LogLevel Debugging       | Adjusting `LogLevel` in `sshd_config` to `DEBUG3` for deep diagnostics.     |
+| 9️⃣ | Non-Standard SSH Ports   | Identifying alternate SSH ports using `grep` on `sshd_config`.             |
+| 🔟  | SSH Client Verbosity     | Using `ssh -vvv` for maximum client-side debugging output.                  |
+
+You can paste this directly into a DevOps Wiki markdown page. It’s clean, readable, and will render nicely in the web UI. Want a collapsible section version too?
+
+------------------------------------------------------
 
 ## All commands covered:
 Here's a consolidated list of **Linux commands** used across all the escape room games you mentioned:

@@ -11,7 +11,7 @@ def banner(text):
     bar = "=" * len(text)
     slow(f"\n{bar}\n{text}\n{bar}")
 
-def shell(prompt="padawan@death-shell:~$ "):
+def shell(prompt="lost@death-shell:~$ "):
     return input(prompt).strip()
 
 def ask_shell(question, correct_cmds, explanation, hint="", reveal_answer=True):
