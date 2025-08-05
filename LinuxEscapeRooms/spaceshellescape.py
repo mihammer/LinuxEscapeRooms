@@ -1,61 +1,7 @@
-import textwrap, time, sys
+from utils import slow, banner, holo, ask_shell
+import textwrap
 
-# ---------------------------------------------------------------------------
-#  Utility helpers (unchanged)
-# ---------------------------------------------------------------------------
-
-def slow(text, delay=0.006):  # Fast scroll for CLI game
-    for ch in text:
-        print(ch, end='', flush=True)
-        time.sleep(delay)
-    print()
-
-def banner(text):
-    bar = "=" * len(text)
-    slow(f"\n{bar}\n{text}\n{bar}")
-
-def shell(prompt="astronaut@space-shell:~$ "):
-    return input(prompt).strip()
-
-# ---------------------------------------------------------------------------
-#  Generic challenge wrapper (keys removed)
-# ---------------------------------------------------------------------------
-
-def ask_shell(question, correct_cmds, explanation, hint="", reveal_answer=True):
-    attempts = 0
-    while True:
-        cmd = shell(question)
-        cmd_lc = cmd.lower()
-
-        if cmd_lc == "hint":
-            slow(f"💡 Hint: {hint}")
-            continue
-
-        if cmd_lc in correct_cmds or any(cmd_lc.startswith(c) for c in correct_cmds):
-            slow("\n✅  Correct!")
-            slow(explanation)
-            break
-
-        attempts += 1
-        if attempts == 3:
-            slow("❌  Strike three! The oxygen meter ticks down. Type `skip` to flee this module, `hint` for a clue, or try again.")
-        elif attempts > 3:
-            if cmd_lc == "skip":
-                slow("↩️  You bail out. The station’s ominous hum follows you as you retreat.")
-                if reveal_answer:
-                    correct_sample = next(iter(correct_cmds))
-                    slow(f"📘  The answer lurking in the logs was: `{correct_sample}`")
-                break
-            else:
-                slow("❌  Wrong again. The lights flicker ominously. (Try `hint` or `skip`.)")
-        else:
-            slow("❌  That’s not it… The temperature gauge spikes. Try again or type `hint`.")
-
-# ---------------------------------------------------------------------------
-#  Intro & ambience (Dark space style)
-# ---------------------------------------------------------------------------
-
-def intro():
+def challenge_intro():
     banner("ESCAPE FROM THE SPACE SHELL")
     slow(textwrap.dedent("""
         Deep in the void, your station’s life support groans under strain.
@@ -70,24 +16,8 @@ def intro():
     """))
     input("\n(Press Enter if you dare…) ")
 
-# ---------------------------------------------------------------------------
-#  Scene helper
-# ---------------------------------------------------------------------------
-
-def holo(title="Distress Beacon"):
-    slow(rf"""
-       .-------------------------------.
-      /  /===========================\  \
-     |  |     {title:^23}     |  |
-      \  \===========================/  /
-       '-------------------------------'
-    """)
-
-# ---------------------------------------------------------------------------
-#  Challenges (Now truly perilous)
-# ---------------------------------------------------------------------------
-
-def ch_add_user():
+def challenge_quiz():
+    # Challenge 1
     banner("Challenge 1 – Infiltrate or Perish")
     holo("Crew Register")
     slow("The terminal sparks as you approach. A voice crackles: 'Authorize stardust or be erased.' Create user `stardust`—your last chance.")
@@ -98,7 +28,7 @@ def ch_add_user():
         hint="Command that adds a user. Don’t let your alias slip into oblivion."
     )
 
-def ch_free():
+    # Challenge 2
     banner("Challenge 2 – Memory Overload")
     holo("Resource Scan")
     slow("Red alerts flood the display: 'Memory corruption detected.' Report free memory before it vanishes.")
@@ -109,7 +39,7 @@ def ch_free():
         hint="Think of ‘no cost’—and human-readable sanity."
     )
 
-def ch_top():
+    # Challenge 3
     banner("Challenge 3 – Under Siege")
     holo("System Overview")
     slow("You feel the station shudder. Real-time CPU and memory stats are required to avoid certain disaster!")
@@ -120,7 +50,7 @@ def ch_top():
         hint="This command shows the top predators in process form."
     )
 
-def ch_kill():
+    # Challenge 4
     banner("Challenge 4 – Exterminate the Menace")
     holo("Terminate 1045")
     slow("A phantom process (PID 1045) screams in the logs. It’s devouring cycles—kill it before it kills you.")
@@ -131,7 +61,7 @@ def ch_kill():
         hint="Ending a process is literal. Use its PID like a scalpel."
     )
 
-def ch_chmod():
+    # Challenge 5
     banner("Challenge 5 – Breach the Locks")
     holo("Unlock Hatch")
     slow("A sealed hatch bars your path to the core. File runme.sh demands 755 permissions to release its hold on the deck.")
@@ -142,7 +72,7 @@ def ch_chmod():
         hint="File mode 755. Unleash the hatch."
     )
 
-def ch_del_user():
+    # Challenge 6
     banner("Challenge 6 – Purge the Traitor")
     holo("Crew Member Delete")
     slow("Operator `nebula` went rogue, broadcasting your coordinates to the void. Delete the account before they summon the horror.")
@@ -153,7 +83,7 @@ def ch_del_user():
         hint="Opposite of useradd. Start with `userdel`."
     )
 
-def ch_grep():
+    # Challenge 7
     banner("Challenge 7 – Hunt the Word")
     holo("Log Analysis")
     slow("Your HUD flickers: ‘Find “orbit” in starlogs.txt or we’re scrap.’ Every second, the shell pulses with red.")
@@ -164,10 +94,10 @@ def ch_grep():
         hint="Use the text-hunting beast: grep."
     )
 
-def ch_symlink():
+    # Challenge 8
     banner("Challenge 8 – Forge the Lifeline")
     holo("Symbolic Links")
-    slow("Systems collapsing, you need a shortcut to the comms deck. Create a symbolic link or be trapped forever. (Give the command to create a symlink.")
+    slow("Systems collapsing, you need a shortcut to the comms deck. Create a symbolic link or be trapped forever. (Give the command to create a symlink.)")
     ask_shell(
         "space-shell> ",
         {"ln -s target link", "ln -s"},
@@ -175,7 +105,7 @@ def ch_symlink():
         hint="‘ln -s’ for symbolic link. It’s your rope out."
     )
 
-def ch_iostat():
+    # Challenge 9
     banner("Challenge 9 – I/O Cataclysm")
     holo("Disk Performance")
     slow("The fusion core’s I/O is spiking. If you don’t stabilize it, the station will implode around you. Check the I/O stats!")
@@ -186,7 +116,7 @@ def ch_iostat():
         hint="Combine IO with stats—iostat."
     )
 
-def ch_support():
+    # Challenge 10
     banner("Challenge 10 – Last Support Beacon")
     holo("Diagnostic Tools")
     slow("Your comms are dying. Use a single command from a Red Hat or SUSE environment to gather diagnostic data!")
@@ -197,38 +127,9 @@ def ch_support():
         hint="One starts with ‘sos’, the other sounds like your cry for help."
     )
 
-# ---------------------------------------------------------------------------
-#  Finale
-# ---------------------------------------------------------------------------
-
-def finale():
+def challenge_outro():
     banner("MISSION OR OBLIVION")
     slow("Sirens wail as the core breaches containment. You sprint through the smoking corridor,\n"
          "launching yourself into your escape pod. The shell’s claws reach for you—but then silence.\n"
          "Did you win… or did you awaken something worse? 🎉\n")
 
-# ---------------------------------------------------------------------------
-#  Main driver
-# ---------------------------------------------------------------------------
-
-def main():
-    import os
-    os.system('cls' if os.name == 'nt' else 'clear')
-    intro()
-    ch_add_user()
-    ch_free()
-    ch_top()
-    ch_kill()
-    ch_chmod()
-    ch_del_user()
-    ch_grep()
-    ch_symlink()
-    ch_iostat()
-    ch_support()
-    finale()
-
-if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        print("\n\n💀  You jettison yourself into the void. Silence follows. Good luck…") 

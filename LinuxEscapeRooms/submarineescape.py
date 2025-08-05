@@ -1,69 +1,16 @@
-#!/usr/bin/env python3
-"""
-LINUX: DEPTHS  – a harrowing command-line escape from a stricken submarine
-Author: Todd Hammer
-"""
-
+from utils import slow, banner, ask_shell
 import textwrap
-import time
-import sys
 
-# ---------------------------------------------------------------------------
-#  Utility helpers
-# ---------------------------------------------------------------------------
+def holo(title="Sonar Beacon"):
+    slow(rf"""
+       .-------------------------------.
+      /  /===========================\  \
+     |  |       {title:^23}       |  |
+      \  \===========================/  / 
+       '-------------------------------'
+    """)
 
-def slow(text, delay=0.006):  # Fast scroll
-    for ch in text:
-        print(ch, end='', flush=True)
-        time.sleep(delay)
-    print()
-
-def banner(text):
-    bar = "=" * len(text)
-    slow(f"\n{bar}\n{text}\n{bar}")
-
-def shell(prompt="engineer@submarine-shell:~$ "):
-    return input(prompt).strip()
-
-# ---------------------------------------------------------------------------
-#  Generic challenge wrapper (with hints)
-# ---------------------------------------------------------------------------
-
-def ask_shell(question, correct_cmds, explanation, reveal_answer=True, hint=None):
-    attempts = 0
-    while True:
-        cmd = shell(question)
-        cmd_lc = cmd.lower()
-
-        if cmd_lc in {c.lower() for c in correct_cmds} or any(cmd_lc.startswith(c.lower()) for c in correct_cmds):
-            slow("\n✅  Correct!")
-            slow(explanation)
-            break
-
-        if cmd_lc == "hint" and hint:
-            slow(f"💡 Hint: {hint}")
-            continue
-
-        attempts += 1
-        if attempts == 3:
-            slow("❌  Third misfire! The hull’s cracking—type `skip` to flood this compartment, `hint` for a clue, or try again.")
-        elif attempts > 3:
-            if cmd_lc == "skip":
-                slow("↩️  You bail out of this station. Cold water rushes in.")
-                if reveal_answer:
-                    correct_sample = next(iter(correct_cmds))
-                    slow(f"📘  The answer was: `{correct_sample}`")
-                break
-            else:
-                slow("❌  Still wrong. Metal groans under pressure. (Try `hint` or `skip`.)")
-        else:
-            slow("❌  That didn’t work… The lights flicker. Try again or type `hint`.")
-
-# ---------------------------------------------------------------------------
-#  Intro & ambience
-# ---------------------------------------------------------------------------
-
-def intro():
+def challenge_intro():
     banner("LINUX: DEPTHS")
     slow(textwrap.dedent("""
         You’re trapped in a submarine sinking beneath freezing waves.
@@ -75,24 +22,8 @@ def intro():
     """))
     input("\n(Press Enter if you dare to dive…) ")
 
-# ---------------------------------------------------------------------------
-#  Scene helper
-# ---------------------------------------------------------------------------
-
-def holo(title="Sonar Beacon"):
-    slow(rf"""
-       .-------------------------------.
-      /  /===========================\  \
-     |  |       {title:^23}       |  |
-      \  \===========================/  /
-       '-------------------------------'
-    """)
-
-# ---------------------------------------------------------------------------
-#  Challenges
-# ---------------------------------------------------------------------------
-
-def ch_crontab():
+def challenge_quiz():
+    # 1. crontab -e
     banner("Challenge 1 – Pump Schedule")
     holo("Edit Flood Pumps")
     slow("Pressure’s rising. Reprogram the flood pumps via crontab to purge water every hour. Edit your user’s crontab!")
@@ -101,7 +32,7 @@ def ch_crontab():
               "Pump schedule set. Water alarms quiet… briefly.",
               hint="Edit your user’s scheduled tasks.")
 
-def ch_date():
+    # 2. date
     banner("Challenge 2 – Time Drift")
     holo("Clock Check")
     slow("The onboard clock is slipping—confirm the current date before systems fail.")
@@ -110,7 +41,7 @@ def ch_date():
               "Date locked in. At least time still marches… somewhere.",
               hint="One command tells you today’s date.")
 
-def ch_install_rhel():
+    # 3. dnf/yum install htop
     banner("Challenge 3 – Vital Tools (RHEL)")
     holo("Install Htop")
     slow("You need to monitor CPU and memory under extreme load. Install `htop` on this RHEL system.")
@@ -119,7 +50,7 @@ def ch_install_rhel():
               "`htop` installed. You glimpse runaway processes before they overwhelm you.",
               hint="Use `dnf` or `yum` with `install`.")
 
-def ch_install_ubuntu():
+    # 4. apt install htop
     banner("Challenge 4 – Vital Tools (Ubuntu)")
     holo("Install Htop")
     slow("Another control station runs Ubuntu—install `htop` there too to keep an eye on resources.")
@@ -128,7 +59,7 @@ def ch_install_ubuntu():
               "`htop` is online. You track memory leaks even as water reaches your boots.",
               hint="Try `apt install` or `apt-get install`.")
 
-def ch_waagent():
+    # 5. /etc/waagent.conf
     banner("Challenge 5 – Resource Hull Check")
     holo("Config Inspection")
     slow("Vital config files might reveal weak points. Which file under `/etc/` shows VM resource disk mounting options?")
@@ -137,7 +68,7 @@ def ch_waagent():
               "You found `/etc/waagent.conf`. The hull’s endurance parameters are exposed.",
               hint="Look for Azure agent settings in `/etc`.")
 
-def ch_restart_net():
+    # 6. Restart network
     banner("Challenge 6 – Restore Comms")
     holo("Network Daemon")
     slow("Communications have cut out. Restart the network daemon before you lose contact entirely.")
@@ -148,7 +79,7 @@ def ch_restart_net():
               "Network rebooted. Faint pings return—perhaps rescue is near.",
               hint="Use `systemctl restart` or `service` to revive the network.")
 
-def ch_ip_addr():
+    # 7. ip addr
     banner("Challenge 7 – Sonar Ping")
     holo("IP Address")
     slow("Ping echo request — find this node’s IP to hand off coordinates to HQ?")
@@ -157,7 +88,7 @@ def ch_ip_addr():
               "IP address acquired. You transmit your location into the abyss.",
               hint="One command shows all network interfaces.")
 
-def ch_tcpdump():
+    # 8. tcpdump
     banner("Challenge 8 – Packet Echo")
     holo("Network Sniffer")
     slow("Salvage every packet before they’re lost to the deep. Which tool captures them live?")
@@ -166,7 +97,7 @@ def ch_tcpdump():
               "`tcpdump` active. You record every fragment of data like sonar pings.",
               hint="A classic CLI packet sniffer.")
 
-def ch_mounts():
+    # 9. mount
     banner("Challenge 9 – Deck Mapping")
     holo("Mount Points")
     slow("Identify every filesystem mounted so you can log data before the pressure crushes disks.")
@@ -175,7 +106,7 @@ def ch_mounts():
               "Mount points listed. You chart your escape route through file systems.",
               hint="A one-word command to list mounts.")
 
-def ch_lsblk():
+    # 10. lsblk
     banner("Challenge 10 – Bulkhead Survey")
     holo("Block Devices")
     slow("How many block devices remain intact under this pressure? Enumerate them.")
@@ -184,7 +115,7 @@ def ch_lsblk():
               "Block devices revealed. You note which drives might survive the crush.",
               hint="Use `lsblk` for a visual device tree.")
 
-def ch_df():
+    # 11. df
     banner("Challenge 11 – Air Supply Gauge")
     holo("Disk Space")
     slow("Disk space dwindles like oxygen. Check how much remains before systems choke.")
@@ -193,11 +124,9 @@ def ch_df():
               "Space confirmed. You race against time as corridors flood.",
               hint="Use `df` with `-h` for human-readable output.")
 
-# ---------------------------------------------------------------------------
-#  Finale
-# ---------------------------------------------------------------------------
+    challenge_outro()
 
-def finale():
+def challenge_outro():
     banner("ESCAPE OR DROWN")
     slow(textwrap.dedent("""
         Sirens wail as water surges through the aft bulkhead.
@@ -206,34 +135,7 @@ def finale():
 
         The submarine rises, creaking in protest, breaking the surface
         just as your console goes dark. You gasp, lungs burning,
-        and watch the saltwater spray again3st the hull.
+        and watch the saltwater spray against the hull.
 
         You survived… for now. 🎉
     """))
-
-# ---------------------------------------------------------------------------
-#  Main driver
-# ---------------------------------------------------------------------------
-
-def main():
-    import os
-    os.system('cls' if os.name == 'nt' else 'clear')
-    intro()
-    ch_crontab()
-    ch_date()
-    ch_install_rhel()
-    ch_install_ubuntu()
-    ch_waagent()
-    ch_restart_net()
-    ch_ip_addr()
-    ch_tcpdump()
-    ch_mounts()
-    ch_lsblk()
-    ch_df()
-    finale()
-
-if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        print("\n\n💀  You abandon ship into icy depths. Silence is your only companion.") 
