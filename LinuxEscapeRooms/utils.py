@@ -78,16 +78,28 @@ def random_story_event():
     else:
         slow(random.choice(SYSTEM_EVENTS))
 
-def ask_multiple_choice(prompt, options, correct_index, explanation, qnum=0):
+def ask_multiple_choice(prompt, options, correct_index, explanation, qnum=0, hint=None):
+    asked_hint = False
     while True:
         slow(textwrap.dedent(prompt))
         for idx, opt in enumerate(options):
             slow(f"  {chr(65 + idx)}. {opt}")
 
-        choice = shell("Choose [A/B/C/D]: ").upper()
+        slow("Type 'hint' for a clue or 'skip' to move on.")
+        user_input = shell("Choose [A/B/C/D] or type 'hint'/'skip': ").strip().upper()
 
-        if choice in "ABCD"[:len(options)]:
-            if ord(choice) - 65 == correct_index:
+        if user_input == "HINT" and hint:
+            slow(f"\n💡 Hint: {hint}\n")
+            asked_hint = True
+            continue
+
+        if user_input == "SKIP":
+            slow("\n⏩ Question skipped.\n")
+            banner("Next Challenge")
+            break
+
+        if user_input in "ABCD"[:len(options)]:
+            if ord(user_input) - 65 == correct_index:
                 slow("Correct!")
                 slow(explanation)
                 slow("\n")
@@ -100,4 +112,4 @@ def ask_multiple_choice(prompt, options, correct_index, explanation, qnum=0):
                 if random.random() < 0.25:
                     slow(random.choice(ROOT_TAUNTS))
         else:
-            slow("Please enter a valid option letter.\n")
+            slow("Please enter a valid option letter, 'hint', or 'skip'.\n")
