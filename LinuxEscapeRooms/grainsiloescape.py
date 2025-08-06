@@ -15,14 +15,15 @@ def show_box(label="Mysterious"):
 def challenge_intro():
     banner("GRAIN SILO DEFUSER")
     slow(textwrap.dedent("""
-        Trapped in a grain silo with a ticking bomb made from a
-        Raspberry Pi, a leaf blower, and a suspicious amount of
-        duct tape. McGyver would be proud—if you make it out alive.
-
-        The dusty console before you is your only tool.
-        Each Linux command snips a wire, disables a sensor, or
-        unlocks a new compartment.
-
+           ||     Trapped in a grain silo with a ticking bomb made from a
+          ||||    Raspberry Pi, a leaf blower, and a suspicious amount of
+          ||||    duct tape. McGyver would be proud—if you make it out alive.
+         ||||||
+        ||||||||  The dusty console before you is your only tool.
+        ||||||||  Each Linux command snips a wire, disables a sensor, or
+        ||||||||  unlocks a new compartment.
+        ||||||||  
+                         
         ⚡ Type like your life depends on it (because it does).
         ⚡ After three missteps, type 'hint' or 'skip' (but every skip
            leaves another wire uncut).

@@ -29,7 +29,7 @@ def challenge_intro():
 
 def challenge_quiz():
     ask_multiple_choice(
-        prompt="Which file contains the interface details in Red Hat?",
+        prompt="Which file contains the interface details in Red Hat?\nType 'hint' for a clue!",
         options=[
             "/etc/sysconfig/network",
             "/etc/network/interfaces",
@@ -38,12 +38,13 @@ def challenge_quiz():
         ],
         correct_index=2,
         explanation="✅ /etc/sysconfig/network-scripts/ifcfg-eth(n) holds interface configs in Red Hat.",
-        qnum=1
+        qnum=1,
+        hint="It's in /etc/sysconfig, in a subdirectory dedicated to network scripts."
     )
     root_taunt()
 
     ask_multiple_choice(
-        prompt="Where should you check DNS resolution configuration?",
+        prompt="Where should you check DNS resolution configuration?\nType 'hint' for a clue!",
         options=[
             "/etc/hostname",
             "/etc/hosts.allow",
@@ -52,12 +53,13 @@ def challenge_quiz():
         ],
         correct_index=3,
         explanation="✅ /etc/resolv.conf shows DNS configuration.",
-        qnum=2
+        qnum=2,
+        hint="This file has 'resolve' in its name and is in /etc."
     )
     root_taunt()
 
     ask_multiple_choice(
-        prompt="Which command is used to determine if the port is listening or not?",
+        prompt="Which command is used to determine if the port is listening or not?\nType 'hint' for a clue!",
         options=[
             "ifconfig",
             "ip addr",
@@ -66,12 +68,13 @@ def challenge_quiz():
         ],
         correct_index=3,
         explanation="✅ ss -ntulp lists listening ports and services.",
-        qnum=3
+        qnum=3,
+        hint="The command is two letters, and the options reveal ports and listening services."
     )
     root_taunt()
 
     ask_multiple_choice(
-        prompt="Which two commands and options may be used to determine the MTU size of the interface?",
+        prompt="Which two commands and options may be used to determine the MTU size of the interface?\nType 'hint' for a clue!",
         options=[
             "ipconfig and ip addr",
             "ip addr show and route -n",
@@ -80,12 +83,13 @@ def challenge_quiz():
         ],
         correct_index=3,
         explanation="✅ ifconfig and ip addr show display MTU info.",
-        qnum=4
+        qnum=4,
+        hint="Both answers are interface utilities—one classic, one modern."
     )
     root_taunt()
 
     ask_multiple_choice(
-        prompt="What's the correct syntax to obtain route information?",
+        prompt="What's the correct syntax to obtain route information?\nType 'hint' for a clue!",
         options=[
             "ip route show",
             "route -r",
@@ -94,12 +98,13 @@ def challenge_quiz():
         ],
         correct_index=0,
         explanation="✅ ip route show is the modern way to see routing.",
-        qnum=5
+        qnum=5,
+        hint="The modern command starts with 'ip' and contains 'route'."
     )
     root_taunt()
 
     ask_multiple_choice(
-        prompt="What's the correct syntax to show iptables rules?",
+        prompt="What's the correct syntax to show iptables rules?\nType 'hint' for a clue!",
         options=[
             "iptables -L",
             "iptables -l",
@@ -108,12 +113,13 @@ def challenge_quiz():
         ],
         correct_index=0,
         explanation="✅ iptables -L lists current firewall rules.",
-        qnum=6
+        qnum=6,
+        hint="The option is a single uppercase letter."
     )
     root_taunt()
 
     ask_multiple_choice(
-        prompt="Which command is used to collect the network traces when working on a connectivity issue?",
+        prompt="Which command is used to collect the network traces when working on a connectivity issue?\nType 'hint' for a clue!",
         options=[
             "tcpdump",
             "selinux",
@@ -122,12 +128,13 @@ def challenge_quiz():
         ],
         correct_index=0,
         explanation="✅ tcpdump is the go-to tool for packet traces.",
-        qnum=7
+        qnum=7,
+        hint="This command dumps packets to the terminal."
     )
     root_taunt()
 
     ask_multiple_choice(
-        prompt="What are the different modes of selinux?",
+        prompt="What are the different modes of selinux?\nType 'hint' for a clue!",
         options=[
             "enforcing, permissive and disabled",
             "active, normal and deactivate",
@@ -136,7 +143,8 @@ def challenge_quiz():
         ],
         correct_index=0,
         explanation="✅ The three SELinux modes: enforcing, permissive, and disabled.",
-        qnum=8
+        qnum=8,
+        hint="There are three: one is strict, one is 'try but don't block', and one is off."
     )
     root_taunt()
 

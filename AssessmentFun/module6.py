@@ -27,7 +27,7 @@ def challenge_intro():
 
 def challenge_quiz():
     ask_multiple_choice(
-        prompt="Which is the recommended disk to set up for swapping?",
+        prompt="Which is the recommended disk to set up for swapping?\nType 'hint' for a clue!",
         options=[
             "OS disk",
             "Data disk",
@@ -36,12 +36,13 @@ def challenge_quiz():
         ],
         correct_index=2,
         explanation="✅ Resource disk is recommended for swap—just remember, it’s temporary!",
-        qnum=1
+        qnum=1,
+        hint="This disk is temporary and designed for fast local storage on VMs."
     )
     root_taunt()
 
     ask_multiple_choice(
-        prompt="Customers should only use the resource disk to store their volatile data because:",
+        prompt="Customers should only use the resource disk to store their volatile data because:\nType 'hint' for a clue!",
         options=[
             "The resource disk can be removed from the Azure portal",
             "The resource disk gets formatted when the VM is shut down.",
@@ -50,12 +51,13 @@ def challenge_quiz():
         ],
         correct_index=2,
         explanation="✅ Resource disk can be wiped anytime the VM is moved, resized, or redeployed.",
-        qnum=2
+        qnum=2,
+        hint="It disappears or is reformatted when the VM moves, resizes, or is redeployed."
     )
     root_taunt()
 
     ask_multiple_choice(
-        prompt="How would you detect but not autocorrect filesystem corruption?",
+        prompt="How would you detect but not autocorrect filesystem corruption?\nType 'hint' for a clue!",
         options=[
             "fsck -a <device>",
             "sync",
@@ -64,12 +66,13 @@ def challenge_quiz():
         ],
         correct_index=3,
         explanation="✅ `fsck -n <device>` checks for errors, but doesn't attempt repair.",
-        qnum=3
+        qnum=3,
+        hint="The answer is an fsck option that prevents making changes."
     )
     root_taunt()
 
     ask_multiple_choice(
-        prompt="A user is not able to create any file locally on a mounted filesystem, but the device can be unmounted and remounted successfully. What WOULDN'T be the reason for this behaviour?",
+        prompt="A user is not able to create any file locally on a mounted filesystem, but the device can be unmounted and remounted successfully. What WOULDN'T be the reason for this behaviour?\nType 'hint' for a clue!",
         options=[
             "The filesystem is corrupted.",
             "df -h shows 100% disk utilization.",
@@ -78,12 +81,13 @@ def challenge_quiz():
         ],
         correct_index=0,
         explanation="✅ If you can remount the device, it’s probably *not* due to a corrupted filesystem.",
-        qnum=4
+        qnum=4,
+        hint="If you can unmount and remount, the filesystem is probably *not* corrupted."
     )
     root_taunt()
 
     ask_multiple_choice(
-        prompt="What is the correct syntax to show the filesystem type of the mounted mountpoints?",
+        prompt="What is the correct syntax to show the filesystem type of the mounted mountpoints?\nType 'hint' for a clue!",
         options=[
             "df -h",
             "fdisk",
@@ -92,12 +96,13 @@ def challenge_quiz():
         ],
         correct_index=2,
         explanation="✅ `df -Th` displays filesystem type and usage.",
-        qnum=5
+        qnum=5,
+        hint="Add a capital T to the classic disk free command."
     )
     root_taunt()
 
     ask_multiple_choice(
-        prompt="Which is the correct sequence of steps for creating an ext4 file system on a new disk(sdd) and making it mount automatically across reboots?",
+        prompt="Which is the correct sequence of steps for creating an ext4 file system on a new disk(sdd) and making it mount automatically across reboots?\nType 'hint' for a clue!",
         options=[
             "fdisk /dev/sdd , n (creating a new partition), select default for all, w  (save) , partprobe to update the kernel about the new partition, mkfs.ext4 /dev/sdd1, create a mountpoint and add its entry in /etc/fstab",
             "fdisk /dev/sdd , p (creating a new partition, select default for all, w (save) and mkfs.ext4 /dev/sdd1 and add the entry in /etc/fstab",
@@ -106,12 +111,13 @@ def challenge_quiz():
         ],
         correct_index=0,
         explanation="✅ The correct process: fdisk, partprobe, mkfs.ext4, mountpoint, and /etc/fstab entry.",
-        qnum=6
+        qnum=6,
+        hint="Look for the answer that mentions partprobe, mkfs.ext4, and an fstab entry."
     )
     root_taunt()
 
     ask_multiple_choice(
-        prompt="Which is the recommended way of specifying the block device in /etc/fstab file to mount a filesystem?",
+        prompt="Which is the recommended way of specifying the block device in /etc/fstab file to mount a filesystem?\nType 'hint' for a clue!",
         options=[
             "Use disk Universally Unique Identifier (UUID)",
             "Use disk names",
@@ -120,12 +126,13 @@ def challenge_quiz():
         ],
         correct_index=0,
         explanation="✅ UUIDs are stable across reboots, unlike device names.",
-        qnum=7
+        qnum=7,
+        hint="This method is stable, unique, and recommended by Linux docs."
     )
     root_taunt()
 
     ask_multiple_choice(
-        prompt="What is the correct syntax to check the size of a file?",
+        prompt="What is the correct syntax to check the size of a file?\nType 'hint' for a clue!",
         options=[
             "df -h <filename>",
             "du -sh <filename>",
@@ -134,7 +141,8 @@ def challenge_quiz():
         ],
         correct_index=1,
         explanation="✅ `du -sh <filename>` reports size in a human-readable format.",
-        qnum=8
+        qnum=8,
+        hint="It's the disk usage command with human-readable and summary flags."
     )
     root_taunt()
 

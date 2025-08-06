@@ -12,7 +12,7 @@ def challenge_intro():
 
 def challenge_quiz():
     ask_multiple_choice(
-        prompt="What is initrd (Initial RAM Disk)?",
+        prompt="What is initrd (Initial RAM Disk)?\nType 'hint' for a clue!",
         options=[
             "Disk partition where the boot loader is stored",
             "Temporary root file system before real root file system is mounted during the boot process",
@@ -21,19 +21,21 @@ def challenge_quiz():
         ],
         correct_index=1,
         explanation="✅ initrd is a temporary root filesystem used during the boot process before the real root is mounted.",
-        qnum=1
+        qnum=1,
+        hint="It's used to help the system boot before the real root filesystem is ready."
     )
 
     ask_multiple_choice(
-        prompt="Which folder is used by default to store non-system users' initial login directories?",
+        prompt="Which folder is used by default to store non-system users' initial login directories?\nType 'hint' for a clue!",
         options=["/etc", "/usr", "/bin", "/home"],
         correct_index=3,
         explanation="✅ /home is the default location for user home directories.",
-        qnum=2
+        qnum=2,
+        hint="Think about where users live on the system."
     )
 
     ask_multiple_choice(
-        prompt="What does GRUB stand for?",
+        prompt="What does GRUB stand for?\nType 'hint' for a clue!",
         options=[
             "Grub for Red Hat and Ubuntu Bootloader",
             "Grand Red Hat Unified Bootloader",
@@ -42,11 +44,12 @@ def challenge_quiz():
         ],
         correct_index=2,
         explanation="✅ GRUB stands for Grand Unified Bootloader.",
-        qnum=3
+        qnum=3,
+        hint="It's not related to food, and it's a 'unified' thing."
     )
 
     ask_multiple_choice(
-        prompt="Which is the correct command to:\n1. Restart\n2. Shutdown?",
+        prompt="Which is the correct command to:\n1. Restart\n2. Shutdown?\nType 'hint' for a clue!",
         options=[
             "1.restart    2.shutdown",
             "1.reboot     2.shutdown -h now",
@@ -55,11 +58,12 @@ def challenge_quiz():
         ],
         correct_index=1,
         explanation="✅ `reboot` restarts and `shutdown -h now` shuts down cleanly.",
-        qnum=4
+        qnum=4,
+        hint="The command for shutdown uses '-h now'."
     )
 
     ask_multiple_choice(
-        prompt="What's the correct syntax to debug information of an SSH operation?",
+        prompt="What's the correct syntax to debug information of an SSH operation?\nType 'hint' for a clue!",
         options=[
             "ssh -vv <user>@<IPADDRESS/Hostname>",
             "ssh -debug <user>@<IPADDRESS/Hostname>",
@@ -68,19 +72,21 @@ def challenge_quiz():
         ],
         correct_index=0,
         explanation="✅ `ssh -vv` enables verbose logging for SSH. More v's = more detail.",
-        qnum=5
+        qnum=5,
+        hint="For more output, just add more v's."
     )
 
     ask_multiple_choice(
-        prompt="What's the correct syntax to check memory utilization?",
+        prompt="What's the correct syntax to check memory utilization?\nType 'hint' for a clue!",
         options=["meminfo", "memory", "free", "df"],
         correct_index=2,
         explanation="✅ `free` is the standard command to check memory usage.",
-        qnum=6
+        qnum=6,
+        hint="It's a simple four-letter command, and it's not 'df'."
     )
 
     ask_multiple_choice(
-        prompt="What's the correct syntax to change the user (linux) and group (azure) ownership of a file named learning_academy?",
+        prompt="What's the correct syntax to change the user (linux) and group (azure) ownership of a file named learning_academy?\nType 'hint' for a clue!",
         options=[
             "chmod linux:azure learning_academy",
             "chage linux azure learning_academy",
@@ -89,11 +95,12 @@ def challenge_quiz():
         ],
         correct_index=3,
         explanation="✅ `chown user:group filename` is the correct syntax.",
-        qnum=7
+        qnum=7,
+        hint="This uses 'chown', and user comes before group."
     )
 
     ask_multiple_choice(
-        prompt="What's the correct syntax to grant read, write, and execute to user, and execute for others on learning_academy?",
+        prompt="What's the correct syntax to grant read, write, and execute to user, and execute for others on learning_academy?\nType 'hint' for a clue!",
         options=[
             "chmod u=rw,o-x learning_academy",
             "chown user=rwx,other=x learning_academy",
@@ -102,11 +109,12 @@ def challenge_quiz():
         ],
         correct_index=3,
         explanation="✅ `chmod u=rwx,o=x` sets the correct permissions.",
-        qnum=8
+        qnum=8,
+        hint="Use 'chmod', and set 'u=rwx' and 'o=x'."
     )
 
     ask_multiple_choice(
-        prompt="What's the correct syntax to locate a file named passwd?",
+        prompt="What's the correct syntax to locate a file named passwd?\nType 'hint' for a clue!",
         options=[
             "search / passwd",
             "locale passwd /",
@@ -115,11 +123,12 @@ def challenge_quiz():
         ],
         correct_index=2,
         explanation="✅ `find / -name passwd` searches from root by name.",
-        qnum=9
+        qnum=9,
+        hint="It's a command that searches starting from /, using '-name'."
     )
 
     ask_multiple_choice(
-        prompt="What's the correct syntax to update the timestamp of a file without modifying its contents?",
+        prompt="What's the correct syntax to update the timestamp of a file without modifying its contents?\nType 'hint' for a clue!",
         options=[
             "vi <filename>",
             "cat <filename>",
@@ -128,7 +137,8 @@ def challenge_quiz():
         ],
         correct_index=3,
         explanation="✅ `touch` updates the modified time without altering contents.",
-        qnum=10
+        qnum=10,
+        hint="This command creates files or updates their timestamps."
     )
 
 def challenge_outro():
