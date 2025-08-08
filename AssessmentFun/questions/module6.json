@@ -1,0 +1,118 @@
+{
+  "title": "STORAGE: ROOT OF ALL SPACE PROBLEMS",
+  "version": 1,
+  "questions": [
+    {
+      "prompt": "What's the correct syntax to check the available space on the mounted filesystems?\nType 'hint' for a clue!",
+      "options": [
+        "df -h",
+        "du -h",
+        "ls -lh",
+        "mount -h"
+      ],
+      "correct_index": 0,
+      "explanation": "✅ `df -h` displays available disk space in human-readable format.",
+      "hint": "This command starts with 'd' and reports filesystem usage.",
+      "qnum": 1,
+      "after": "taunt"
+    },
+    {
+      "prompt": "Which command is used to determine disk usage for a specific directory?\nType 'hint' for a clue!",
+      "options": [
+        "df -h",
+        "du -sh <directory>",
+        "ls -lh",
+        "find <directory>"
+      ],
+      "correct_index": 1,
+      "explanation": "✅ `du -sh <directory>` summarizes disk usage for that directory.",
+      "hint": "It's 'disk usage', not 'disk free'.",
+      "qnum": 2,
+      "after": "taunt"
+    },
+    {
+      "prompt": "What's the correct syntax to display the UUID of all partitions?\nType 'hint' for a clue!",
+      "options": [
+        "lsblk -f",
+        "blkid",
+        "fdisk -l",
+        "mount"
+      ],
+      "correct_index": 1,
+      "explanation": "✅ `blkid` lists block device attributes, including UUIDs.",
+      "hint": "This short command starts with 'blk'.",
+      "qnum": 3,
+      "after": "taunt"
+    },
+    {
+      "prompt": "Which file contains the static information about filesystems to be mounted at boot?\nType 'hint' for a clue!",
+      "options": [
+        "/etc/fstab",
+        "/etc/mtab",
+        "/etc/fstab.conf",
+        "/proc/mounts"
+      ],
+      "correct_index": 0,
+      "explanation": "✅ `/etc/fstab` defines filesystems for automatic mounting at boot.",
+      "hint": "It's in /etc and the name starts with 'fst'.",
+      "qnum": 4,
+      "after": "taunt"
+    },
+    {
+      "prompt": "Which command can be used to unmount a filesystem?\nType 'hint' for a clue!",
+      "options": [
+        "mount -u",
+        "unmount",
+        "umount",
+        "detach"
+      ],
+      "correct_index": 2,
+      "explanation": "✅ `umount` unmounts a filesystem.",
+      "hint": "It's missing an 'n'.",
+      "qnum": 5,
+      "after": "taunt"
+    },
+    {
+      "prompt": "What's the correct syntax to create a new ext4 filesystem on /dev/sdb1?\nType 'hint' for a clue!",
+      "options": [
+        "mkfs.ext4 /dev/sdb1",
+        "mke2fs /dev/sdb1",
+        "mkfs -t ext4 /dev/sdb1",
+        "Both mkfs.ext4 /dev/sdb1 and mkfs -t ext4 /dev/sdb1"
+      ],
+      "correct_index": 3,
+      "explanation": "✅ Both `mkfs.ext4 /dev/sdb1` and `mkfs -t ext4 /dev/sdb1` work.",
+      "hint": "There are two equally correct answers here.",
+      "qnum": 6,
+      "after": "taunt"
+    },
+    {
+      "prompt": "Which command shows the inode usage of filesystems?\nType 'hint' for a clue!",
+      "options": [
+        "df -i",
+        "du -i",
+        "ls -i",
+        "stat -i"
+      ],
+      "correct_index": 0,
+      "explanation": "✅ `df -i` displays inode usage.",
+      "hint": "Think 'disk free' but for inodes.",
+      "qnum": 7,
+      "after": "taunt"
+    },
+    {
+      "prompt": "What's the correct syntax to resize a filesystem mounted on /data?\nType 'hint' for a clue!",
+      "options": [
+        "resize2fs /data",
+        "resize2fs /dev/sdXn",
+        "resize2fs /mnt/data",
+        "resize2fs <device_name>"
+      ],
+      "correct_index": 1,
+      "explanation": "✅ You resize the block device, not the mountpoint—`resize2fs /dev/sdXn`.",
+      "hint": "It's done on the device node, not the folder.",
+      "qnum": 8,
+      "after": "taunt"
+    }
+  ]
+}

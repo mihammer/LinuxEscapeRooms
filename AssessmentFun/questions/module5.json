@@ -1,0 +1,118 @@
+{
+  "title": "NETWORK: THE ROOT OF ALL PROBLEMS",
+  "version": 1,
+  "questions": [
+    {
+      "prompt": "Which file contains the interface details in Red Hat?\nType 'hint' for a clue!",
+      "options": [
+        "/etc/sysconfig/network",
+        "/etc/network/interfaces",
+        "/etc/sysconfig/network-scripts/ifcfg-eth(n)",
+        "/etc/hosts"
+      ],
+      "correct_index": 2,
+      "explanation": "✅ /etc/sysconfig/network-scripts/ifcfg-eth(n) holds interface configs in Red Hat.",
+      "hint": "It's in /etc/sysconfig, in a subdirectory dedicated to network scripts.",
+      "qnum": 1,
+      "after": "taunt"
+    },
+    {
+      "prompt": "Where should you check DNS resolution configuration?\nType 'hint' for a clue!",
+      "options": [
+        "/etc/hostname",
+        "/etc/hosts.allow",
+        "/etc/hosts.deny",
+        "/etc/resolv.conf"
+      ],
+      "correct_index": 3,
+      "explanation": "✅ /etc/resolv.conf shows DNS configuration.",
+      "hint": "This file has 'resolve' in its name and is in /etc.",
+      "qnum": 2,
+      "after": "taunt"
+    },
+    {
+      "prompt": "Which command is used to determine if the port is listening or not?\nType 'hint' for a clue!",
+      "options": [
+        "ifconfig",
+        "ip addr",
+        "route -n",
+        "ss -ntulp"
+      ],
+      "correct_index": 3,
+      "explanation": "✅ ss -ntulp lists listening ports and services.",
+      "hint": "The command is two letters, and the options reveal ports and listening services.",
+      "qnum": 3,
+      "after": "taunt"
+    },
+    {
+      "prompt": "Which two commands and options may be used to determine the MTU size of the interface?\nType 'hint' for a clue!",
+      "options": [
+        "ipconfig and ip addr",
+        "ip addr show and route -n",
+        "netstat and ip addr show",
+        "ifconfig and ip addr show"
+      ],
+      "correct_index": 3,
+      "explanation": "✅ ifconfig and ip addr show display MTU info.",
+      "hint": "Both answers are interface utilities—one classic, one modern.",
+      "qnum": 4,
+      "after": "taunt"
+    },
+    {
+      "prompt": "What's the correct syntax to obtain route information?\nType 'hint' for a clue!",
+      "options": [
+        "ip route show",
+        "route -r",
+        "route -rn",
+        "ifconfig -r"
+      ],
+      "correct_index": 0,
+      "explanation": "✅ ip route show is the modern way to see routing.",
+      "hint": "The modern command starts with 'ip' and contains 'route'.",
+      "qnum": 5,
+      "after": "taunt"
+    },
+    {
+      "prompt": "What's the correct syntax to show iptables rules?\nType 'hint' for a clue!",
+      "options": [
+        "iptables -L",
+        "iptables -l",
+        "iptables -F",
+        "iptables -rules"
+      ],
+      "correct_index": 0,
+      "explanation": "✅ iptables -L lists current firewall rules.",
+      "hint": "The option is a single uppercase letter.",
+      "qnum": 6,
+      "after": "taunt"
+    },
+    {
+      "prompt": "Which command is used to collect the network traces when working on a connectivity issue?\nType 'hint' for a clue!",
+      "options": [
+        "tcpdump",
+        "selinux",
+        "netcat",
+        "netsh"
+      ],
+      "correct_index": 0,
+      "explanation": "✅ tcpdump is the go-to tool for packet traces.",
+      "hint": "This command dumps packets to the terminal.",
+      "qnum": 7,
+      "after": "taunt"
+    },
+    {
+      "prompt": "What are the different modes of selinux?\nType 'hint' for a clue!",
+      "options": [
+        "enforcing, permissive and disabled",
+        "active, normal and deactivate",
+        "enabled, permissive and disabled",
+        "allow, deny, reject"
+      ],
+      "correct_index": 0,
+      "explanation": "✅ The three SELinux modes: enforcing, permissive, and disabled.",
+      "hint": "There are three: one is strict, one is 'try but don't block', and one is off.",
+      "qnum": 8,
+      "after": "taunt"
+    }
+  ]
+}

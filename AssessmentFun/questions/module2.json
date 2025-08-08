@@ -1,0 +1,123 @@
+{
+  "title": "LINUX APPENDIX: LOGFILE MAYHEM",
+  "version": 1,
+  "questions": [
+    {
+      "prompt": "What's the correct syntax to append data to the existing file named 'record'?\nType 'hint' for a clue!",
+      "options": [
+        "echo \"text\" >> record",
+        "echo \"………\" | record",
+        "more record",
+        "cat record"
+      ],
+      "correct_index": 0,
+      "explanation": "✅ Use `echo \"text\" >> record` to append data to the file.",
+      "hint": "The operator for appending is two greater-than signs with no space.",
+      "qnum": 11
+    },
+    {
+      "prompt": "What's the correct syntax to print only lines that have the word 'successfully' in /var/log/yum.log?\nType 'hint' for a clue!",
+      "options": [
+        "echo \"successfully\" /var/log/yum.log",
+        "vi /var/log/yum.log | grep successfully",
+        "less /var/log/yum.log | Successfully",
+        "grep -i SuccessfullY /var/log/yum.log"
+      ],
+      "correct_index": 3,
+      "explanation": "✅ `grep -i SuccessfullY /var/log/yum.log` prints lines (case-insensitive) containing 'successfully'.",
+      "hint": "You want a search that's case-insensitive. Which command does that?",
+      "qnum": 12
+    },
+    {
+      "prompt": "What's the correct syntax to view new records being appended to a file?\nFor example: /var/log/messages\nType 'hint' for a clue!",
+      "options": [
+        "cat /var/log/messages",
+        "tail -f /var/log/messages",
+        "less /var/log/messages",
+        "more /var/log/messages"
+      ],
+      "correct_index": 1,
+      "explanation": "✅ `tail -f /var/log/messages` follows new entries in real time.",
+      "hint": "This command follows a file as it grows.",
+      "qnum": 13
+    },
+    {
+      "prompt": "A file named 'alphabets' contains the alphabet letters in mixed order one per line.\nWhat's the correct syntax to display the file contents sorted in reverse alphabetical order?\nType 'hint' for a clue!",
+      "options": [
+        "sort -n alphabets",
+        "sort -disorder alphabets",
+        "sort -r alphabets",
+        "sort alphabets"
+      ],
+      "correct_index": 2,
+      "explanation": "✅ `sort -r alphabets` sorts the file in reverse order.",
+      "hint": "The option for reverse is a single dash and a single letter.",
+      "qnum": 14
+    },
+    {
+      "prompt": "Which command collects configuration/system/diagnostic information on RHEL and sometimes other distributions?\nType 'hint' for a clue!",
+      "options": [
+        "sosreport",
+        "sar",
+        "supportconfig",
+        "kdump"
+      ],
+      "correct_index": 0,
+      "explanation": "✅ `sosreport` is the go-to diagnostic info collector.",
+      "hint": "This command sounds like it's asking for help.",
+      "qnum": 15
+    },
+    {
+      "prompt": "What's the correct syntax to configure a service to start automatically across reboots on RHEL 7+?\nType 'hint' for a clue!",
+      "options": [
+        "service <daemon> reboot",
+        "chkconfig <daemon>  on",
+        "systemctl is-enabled <daemon>",
+        "systemctl enable <daemon>"
+      ],
+      "correct_index": 3,
+      "explanation": "✅ `systemctl enable <daemon>` makes the service auto-start on boot.",
+      "hint": "Use the modern service manager and an 'enable' command.",
+      "qnum": 16
+    },
+    {
+      "prompt": "Which utility can provide historical data of system activity and resource utilization?\nType 'hint' for a clue!",
+      "options": [
+        "sar",
+        "cat /proc/meminfo",
+        "dmesg",
+        "swapon"
+      ],
+      "correct_index": 0,
+      "explanation": "✅ `sar` is the Swiss Army knife for system activity history.",
+      "hint": "This command's name starts with 's' and is three letters long.",
+      "qnum": 17
+    },
+    {
+      "prompt": "What's the correct syntax to list the cron jobs for the root user?\nType 'hint' for a clue!",
+      "options": [
+        "cat /etc/cron/root",
+        "sudo crontab -l",
+        "crontab -U root -l",
+        "crontab -a | grep root"
+      ],
+      "correct_index": 1,
+      "explanation": "✅ `sudo crontab -l` lists root's cron jobs.",
+      "hint": "It's a command run as root, and the option lists jobs.",
+      "qnum": 18
+    },
+    {
+      "prompt": "How do you identify a soft link file (shortcut) in ls -l output?\nType 'hint' for a clue!",
+      "options": [
+        "First character of the output is s",
+        "Second character of the output is l",
+        "First character of the output is r",
+        "First character of the output is l"
+      ],
+      "correct_index": 3,
+      "explanation": "✅ The first character being 'l' means it's a symbolic link.",
+      "hint": "Look for the very first character in the permissions string.",
+      "qnum": 19
+    }
+  ]
+}
