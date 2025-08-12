@@ -40,7 +40,7 @@ def challenge_quiz():
 # <file system> <mount point> <type> <options> <dump> <pass>
 1: UUID=102ee66d-b0c0-4d1c-8087-f5c32873987e /        ext4 defaults 0 1
 2: /dev/sda1                               /boot     ext2 defaults 0 2
-3: /dev/sdzzz                              /home     ext4 defaults 0 2
+3: /dev/sd-zzz                              /home     ext4 defaults 0 2
 """)
     slow("Which number is the bogus wire (bad config)? (Type just the number)")
     ask_shell("> ", {"3"},
