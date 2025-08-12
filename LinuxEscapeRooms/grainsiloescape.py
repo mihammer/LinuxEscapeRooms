@@ -44,7 +44,7 @@ def challenge_quiz():
 """)
     slow("Which number is the bogus wire (bad config)? (Type just the number)")
     ask_shell("> ", {"3"},
-        "‘/dev/sdzzz’ isn’t a real disk—if you’d cut that wire for real, you’d be toast.",
+        "‘/dev/sd-zzz’ isn’t a real disk—if you’d cut that wire for real, you’d be toast.",
         hint="Device names are usually sda1, sdb2, etc. Never sdzzz.")
 
     # 2. top/CPU
